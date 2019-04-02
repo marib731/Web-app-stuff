@@ -11,7 +11,6 @@ import requests
 #from bs4 import BeautifulSoup
 #import json
 import time
-from builtins import None
 
 def fix_data(row):
     row['StationID'] = row['number']
