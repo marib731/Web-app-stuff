@@ -35,7 +35,6 @@ def get_conn():
 def main():
     conn = get_conn()
     print(conn)
-    if True: return 
     
     if conn is None:
         print("error with conn")
