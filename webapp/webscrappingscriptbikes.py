@@ -11,7 +11,7 @@ import requests
 #from bs4 import BeautifulSoup
 #import json
 import time
-
+import traceback
 def fix_data(row):
     row['StationID'] = row['number']
     del row['number']
@@ -27,13 +27,16 @@ def get_conn():
                                    passwd="SoftwareEngineering2019",
                                    host="dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com",
                                    database='DublinBikesData')
-        mycursor = conn.cursor()
+        return conn
     except:
-        print("Connection to RDS instance failed")
+        print("Connection to RDS instance failed", traceback.format_exc())
         return None
     
 def main():
     conn = get_conn()
+    print(conn)
+    if True: return 
+    
     if conn is None:
         print("error with conn")
         return 
