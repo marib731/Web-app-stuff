@@ -11,6 +11,7 @@ import requests
 #from bs4 import BeautifulSoup
 #import json
 import time
+from builtins import None
 
 def fix_data(row):
     row['StationID'] = row['number']
@@ -21,16 +22,25 @@ def fix_data(row):
     return row
 
 
-
-try:
-    conn = mysql.connector.connect(user="EnxiJessieMarian",
+def get_conn():
+    try:
+        conn = mysql.connector.connect(user="EnxiJessieMarian",
                                    passwd="SoftwareEngineering2019",
                                    host="dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com",
                                    database='DublinBikesData')
+        mycursor = conn.cursor()
+    except:
+        print("Connection to RDS instance failed")
+        return None
+    
+def main():
+    conn = get_conn()
+    if conn is None:
+        print("error with conn")
+        return 
+    
     mycursor = conn.cursor()
-except:
-    print("Connection to RDS instance failed")
-try:
+    
     while True:
     
         url = "https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=166048e0e00bbc76dd9a53d07bab98427b29d1e0"
@@ -50,6 +60,7 @@ try:
         time.sleep(600)
     
     conn.commit()
-except:
-    print("Error accessing JCDecaux")
-conn.close()
+    conn.close()
+    
+if __name__ == '__main__':
+    main()
