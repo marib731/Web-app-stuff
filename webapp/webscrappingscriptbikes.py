@@ -52,7 +52,7 @@ def main():
             mycursor.execute(sql, list(row.values()))
             conn.commit()
         print("Sleeping")
-        time.sleep(600)
+        time.sleep(2)
      
     conn.commit()
     conn.close()
