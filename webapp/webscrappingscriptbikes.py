@@ -24,13 +24,14 @@ def get_conn():
                                    passwd="SoftwareEngineering2019",
                                    host="dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com",
                                    database='DublinBikesData')
-        return conn.cursor()
+        return conn
     except:
         print("Connection to RDS instance failed", traceback.format_exc())
         return None
      
 def main():
-    mycursor = get_conn()      
+    conn = get_conn()
+    mycursor = conn.cursor()      
     while True:
         url = "https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=166048e0e00bbc76dd9a53d07bab98427b29d1e0"
         the_page = requests.get(url).json()
@@ -40,18 +41,21 @@ def main():
             table_name = "DublinBikesData"
             if 'number' in row:
                 row = fix_data(row)
+            #print(row)
             placeholder = ", ".join(["%s"] * len(row))
-            sql = "insert ignore into {table} ({columns}) values ({values});".format(table=table_name, columns=",".join(row.keys()), 
-                                                                                       values=placeholder)
             
-            print(sql)
+            
+            #print(placeholder)
+            sql = "insert ignore into {table} ({columns}) values ({values});".format(table=table_name, columns=",".join(row.keys()), 
+                                                                                   values=placeholder)
+            #print(sql)
             mycursor.execute(sql, list(row.values()))
-            mycursor.commit()
+            conn.commit()
         print("Sleeping")
         time.sleep(600)
      
-    mycursor.commit()
-    mycursor.close()
+    conn.commit()
+    conn.close()
      
 if __name__ == '__main__':
     main()
