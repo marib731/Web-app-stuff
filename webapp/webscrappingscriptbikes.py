@@ -42,7 +42,7 @@ def main():
             conn.execute(sql, list(row.values()))
         
         print("Sleeping")
-        time.sleep(1000)
+        time.sleep(6*60)
     engine.close()
      
 if __name__ == '__main__':
