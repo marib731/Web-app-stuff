@@ -1,0 +1,125 @@
+/*************main background**********************/
+body{
+    background-color: #114B56;
+}
+
+.whitebkgnd{
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 3%;
+    padding: 5%;
+    max-width: 90%;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    height: 100%;
+
+}
+/***************************************************/
+
+/************************Nav Bar Start**********************/
+
+/*removes dots/bullet points from list*/
+.nav ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*display nav horizontal*/
+.nav ul li {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+/*centers navbar buttons*/
+.nav ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav ul li {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Nav bar background colour*/
+.nav ul {
+    background-color: #114B56;
+}
+
+/*nav background colour on hovering over button*/
+.nav ul li:hover {
+    background-color: #f1f1f1;
+    text-emphasis-color: black;
+}
+
+/*nav background colour on selected button*/
+.nav ul li:active {
+    background-color: #f1f1f1;
+    text-emphasis-color: black;
+}
+
+/*text colour and decoration inside nav buttons*/
+.nav ul li a {
+    display: inherit;
+    color: white; /*text/link colour*/
+    /*spaces of and between buttons*/
+    padding-left: 47px;
+    padding-right: 47px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none; /*text decoration none removes line under link on navbar*/
+}
+
+/* search box inside the navigation bar */
+.nav ul input[type=text] {
+    float: right;
+    padding: 6px;
+    border: none;
+    margin-top: 8px;
+    margin-right: 16px;
+    font-size: 17px;
+    border: 1px solid #ccc;
+    border-radius: 15px 50px;
+}
+
+/************************Nav Bar end**********************/
+
+
+
+/****************Index Page Map*****************************/
+/* Always set the map height explicitly to define the size of the div
+ * element that contains the map. */
+ #map {
+  height: 100%;
+  width: 96%;
+  margin: 0 auto;
+ }
+ /* Optional: Makes the sample page fill the window. 
+ html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}*/
+
+/**********************Index page map end*******************/
+
+
+
+/**********************alert box end*******************
+.alerts-container {
+    margin: 0;
+    padding: 0;
+    width: 200px;
+    background-color: #f1f1f1;
+    position: fixed;
+    height: 100%;
+    overflow: auto;
+}
+
+
+/**********************alert box end*******************/

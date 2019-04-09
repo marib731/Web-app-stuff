@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/css/main.css">
+</head>
+<body>
+    <!--nav bar-->
+    <header class="header" id="header">
+        <!--nav bar image-->
+        <img src="static/image/Banniere.png" alt="Banner" width="100%" height="10%">
+            <!--Nav Bar List-->
+            <div class="nav" id="nav">
+                <ul>
+                    <li class="index"><a href="index.html">Home</a></li>
+                    <li class="stations"><a href="stations.html">Stations</a>
+                    <li class="route-planner"><a href="route-planner.html">Route Planner</a></li>
+                    <li class="getting-started"><a href="getting-started.html">Getting Started</a></li>
+                    <li class="contact"><a href="contact.html">Contact</a></li>
+                    <li class="my-account"><a href="my-account.html">My Account</a></li>
+                    <input type="text" placeholder="Search.." name="search">
+                </ul>
+            </div>
+	</header>
+    <!--nav bar end-->
+
+    <!--main body of content-->
+<div class="whitebkgnd" id="whitebkgnd"> 
+    
+    <!--map-->   
+    <input id="mapTraffic" type="button" value="Turn on Traffic" />
+    <div style="width: 100%; height: 60%; margin-top: 10px;">
+      <div id="map" class="map"></div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="static/js/GoogleMapsAPI.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFqt0viVKUQkLpX0Fmnfj4W9yTj-7sew&callback=initMap"></script>
+    
+    
+    <!--alerts side bar-->
+     <div id="alerts-container" class="alerts-container">
+         <h2>RoadwatchAlerts</h2>
+        <ul class="alerts" id="aaslerts">
+        </ul>
+        <h2>DublinBikeAlerts</h2>
+        <ul class="alerts" id="alerts">
+        </ul>
+
+    </div>
+    
+</div>
+    
+    <script src="static/js/main.js"></script>
+</body>
+</html>
+
