@@ -6,51 +6,68 @@ var trafficLayer;
 var timestamps = ['900913-m50m', '900913-m45m', '900913-m40m', '900913-m35m', '900913-m30m', '900913-m25m', '900913-m20m', '900913-m15m', '900913-m10m', '900913-m05m', '900913'];
 
 function initMap() {
-  console.log('initing map...')
     // Set Variables
     trafficLayer = new google.maps.TrafficLayer();
     infoWindow = new google.maps.InfoWindow();
+    bikeLayer = new google.maps.BicyclingLayer();
   
     // Center for map
     thePos = {lat: 53.3498, lng: -6.2603};
     
     // Create map
     map = new google.maps.Map($('#map')[0], {
-      zoom: 12,
+      zoom: 13,
       center: thePos
     });
     
     // Create markers
-   //checkbox filters here - eventlistener 
-    marker = new google.maps.Marker({
-      position: thePos,
-      map: map
-    });
-    
-    
+    fetch('/api/stations')
+      .then(function(response) {
+        console.log("Getting stations")
+        //check the response was ok
+        if (response.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + response.status);
+            return;
+        }
+        response.json().then((data) => {
+            //checkbox filters here - eventlistener
+            //
+            for (var item in data) {
+                    //console.log(data)
+                    console.log(item)
+                    latandlong = data[item]
+                //console.log(latandlong)
+                    StationLat = latandlong[0];
+                    StationLng = latandlong[1];
+                    // Create markers
+                   //checkbox filters here - eventlistener 
+                /*        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
+        var beachMarker = new google.maps.Marker({
+          position: {lat: -33.890, lng: 151.274},
+          map: map,
+          icon: image
+        });*/
+                    marker = new google.maps.Marker({
+                      position: {lat: StationLat, lng: StationLng},
+                      map: map
+                    });
+            }
+        }).catch((err) => {
+            console.log('Fetch Error :-S', err)
+        })
+    })
 }
 
 
-// Handle errors for locating user
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
-    'Error: Your browser doesn\'t support geolocation.');
-  infoWindow.open(map);
-}
-
-// Turn on/off Weather Radar
-$('#mapRadar').click(function(){
+// Turn on/off Bicycle Lanes
+$('#mapBike').click(function(){
   
-  if($(this).val() === 'Turn on Weather Radar'){
-    i = 0;
-    $(this).val('Turn off Weather Radar');
-    radarInterval = setInterval(startAnimation, 500);
-  }else{
-    $(this).val('Turn on Weather Radar');
-    clearInterval(radarInterval);
-    map.overlayMapTypes.clear();
+  if($(this).val() === 'Turn on Bike Lanes'){
+    $(this).val('Turn off Bike Lanes');
+    bikeLayer.setMap(map)
+  } else{
+    $(this).val('Turn on Bike Lanes');
+    bikeLayer.setMap(null);
   }
   
 })
@@ -67,27 +84,6 @@ $('#mapTraffic').click(function(){
   }
   
 })
-
-// Animate the Weather Radar
-function startAnimation(){
-    map.overlayMapTypes.clear();
-    map.overlayMapTypes.push(null);
-    tileNEX = new google.maps.ImageMapType({
-      getTileUrl: function(tile, zoom) {
-          return "https://mesonet.agron.iastate.edu/cache/tile.py/1.0.0/nexrad-n0q-" + timestamps[i] + "/" + zoom + "/" + tile.x + "/" + tile.y +".png"; 
-      },
-      tileSize: new google.maps.Size(256, 256),
-      opacity:0.60,
-      name : 'NEXRAD',
-      isPng: true
-    });
-    map.overlayMapTypes.setAt("0", tileNEX);
-  
-    i++;
-    if (i > 10 ){
-      i = 0;
-    }
-}
 
 
 
