@@ -6,7 +6,7 @@ var trafficLayer;
 var timestamps = ['900913-m50m', '900913-m45m', '900913-m40m', '900913-m35m', '900913-m30m', '900913-m25m', '900913-m20m', '900913-m15m', '900913-m10m', '900913-m05m', '900913'];
 
 function initMap() {
-  
+  console.log('initing map...')
     // Set Variables
     trafficLayer = new google.maps.TrafficLayer();
     infoWindow = new google.maps.InfoWindow();
