@@ -17,9 +17,9 @@ def getStations():
     the_page = requests.get(url).json()
     stationLocations = {}
     for row in the_page:
-        stationLocations[row['StationID']] = [row['position']['lat'], row['position']['lng']]
-        conn.execute()
+        stationLocations[row['number']] = [row['position']['lat'], row['position']['lng']]
+        #conn.execute()
     stationLocationsJSON = json.dumps(stationLocations)
     return stationLocationsJSON
     engine.close()
-     
+
