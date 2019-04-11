@@ -23,7 +23,7 @@ function initMap() {
     // Create markers
     fetch('/api/stations')
       .then(function(response) {
-        console.log("Getting stations")
+        //console.log("Getting stations")
         //check the response was ok
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' + response.status);
@@ -34,7 +34,7 @@ function initMap() {
             //
             for (var item in data) {
                     //console.log(data)
-                    console.log(item)
+                    //console.log(item)
                     latandlong = data[item]
                 //console.log(latandlong)
                     StationLat = latandlong[0];

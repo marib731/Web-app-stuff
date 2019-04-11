@@ -32,12 +32,17 @@
     <!--map-->   
     <input id="mapTraffic" type="button" value="Turn on Traffic" />
     <input id="mapBike" type="button" value="Turn on Bike Lanes" />
+    <input id="mapW" type="button" value="Turn on Weather" />
     <div>
       <div id="map" class="map"></div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="static/js/GoogleMapsAPI.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFqt0viVKUQkLpX0Fmnfj4W9yTj-7sew&callback=initMap"></script>
+    <div id="weather-container" class="weather-container">
+        <ul class="weather" id="weather">
+        </ul>
+    </div>
     
     
     <!--alerts side bar-->
