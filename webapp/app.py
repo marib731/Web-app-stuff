@@ -8,6 +8,7 @@ Created on Tue Apr  2 10:46:02 2019
 from flask import Flask, render_template
 from alertScraper import *
 from stationMarkers import *
+from weatherConnect import *
 
 app = Flask(__name__)
 
@@ -47,6 +48,10 @@ def get_aa():
 @app.route('/api/stations')
 def gettingStationLatLng():
     return getStations()
+
+@app.route('/api/weather')
+def gettingWeather():
+    return getWeather()
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
