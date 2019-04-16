@@ -5,7 +5,16 @@ Created on Tue Apr  2 10:46:02 2019
 @author: Jessie
 
 """
-
+import requests
+import sqlalchemy
+from flask import jsonify
+from sqlalchemy import create_engine, Column, Integer, String, DateTime
+from sqlalchemy.orm import scoped_session, sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
+import sqlite3
+import logging
+import pandas as pd
+from flask import Flask, g, render_template, url_for, jsonify, request
 from flask import Flask, render_template, request, jsonify
 from alertScraper import *
 from stationMarkers import *
@@ -14,20 +23,63 @@ import numpy
 import pickle
 import json
 
+app = Flask(__name__, static_url_path='')
+app.config.update(MAPS_APIKEY='AIzaSyD9RSjs_rAUX_KRiXxzUlNAL1aVzyZ6hs0',BIKE_API='8c88bf369a36af98d796377bc7d0defaf5bc562e') 
+ # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://EnxiJessieMarian:SoftwareEngineering2019@dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com:3306/DublinBikesData'
+engine = create_engine('mysql://EnxiJessieMarian:SoftwareEngineering2019@dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com:3306/DublinBikesData', echo=True)
+Base = declarative_base()
+Base.metadata.reflect(engine)
+
 app = Flask(__name__)
 
 #  Enxi begin
 @app.route('/stations')
 def stations():
     stations_json = {}
+    session = loadsession()
+    all_stations = session.query(Station.StationID).distinct()
+    station_list=[]
+    for station in all_stations:
+        station_list.append(session.query(Station).filter_by(StationID=station.StationID).first())
     try:
         with open("static/files/dublin.json") as stations_file:
             stations_json = json.load(stations_file)
 
     except Exception:
         pass
-    return render_template('stations.html', stations_json=stations_json)
+    return render_template('stations.html', stations_json=stations_json, title="stations", stations=station_list)
 #  Enxi end
+
+
+#marian
+class Station(Base):
+    __tablename__ = 'DublinBikesData'
+    __tableargs__ = {'autoload': True}
+
+def loadsession():
+    metadata = Base.metadata
+    Session = sessionmaker(bind=engine)
+    session = Session()
+    return session
+
+
+
+@app.route("/station_id", methods=['POST'])
+def get_station_id():
+    session = loadsession()
+    logging.info(request.args)
+    stationid = int(request.form['station_id'])
+    station = session.query(Station).filter_by(StationID=stationid).first()
+    out_ = {}
+    out_['address'] = station.address
+    out_['bike_stands'] = station.bike_stands
+    out_['available_bike_stands']= station.available_bike_stands
+    out_['available_bikes'] = station.available_bikes
+    out_['StationID'] = station.StationID
+    return jsonify(out_)
+#marian end
+
+
 
 @app.route('/route-planner')
 def route():
