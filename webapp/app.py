@@ -7,15 +7,13 @@ Created on Tue Apr  2 10:46:02 2019
 """
 import requests
 import sqlalchemy
-from flask import jsonify
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import sqlite3
 import logging
 import pandas as pd
-from flask import Flask, g, render_template, url_for, jsonify, request
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, g, render_template, url_for, jsonify, request, jsonify
 from alertScraper import *
 from stationMarkers import *
 from weatherConnect import *

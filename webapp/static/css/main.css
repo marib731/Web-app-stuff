@@ -137,6 +137,16 @@ body{
             font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
             font-weight: bold;
             font-size: 100%;
+            border: #5f788a;
+            bottom: 240px;
+            z-index: 99;
+            left: 30%; 
+            color: white; 
+            text-shadow: black;
+            width: 15%;
+            margin: auto;
+            position: relative;
+            padding: 0;
         }
 
         #search_date {
