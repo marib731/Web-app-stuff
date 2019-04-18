@@ -54,13 +54,17 @@ body{
 /*nav background colour on hovering over button*/
 .nav ul li:hover {
     background-color: #f1f1f1;
-    text-emphasis-color: black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: black;
 }
 
 /*nav background colour on selected button*/
 .nav ul li:active {
     background-color: #f1f1f1;
-    text-emphasis-color: black;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    color: black;
 }
 
 /*text colour and decoration inside nav buttons*/
@@ -107,7 +111,6 @@ body{
     box-shadow: 1px 1px 5px black;
     border-radius: 15px;
     padding: 1%;
-    background-color: grey;
     color: black;
     text-align: left;
     font-family: Arial;
@@ -127,7 +130,7 @@ body{
             text-align: center;
             font-family: Arial;
             opacity: 0.2;
-
+          list-style-type: none;
         }
 
         #map {
@@ -137,6 +140,7 @@ body{
         }
 
         #weather_box {
+            list-style-type: none;
             background-color: rgba(0, 0, 0, 0.25);
             box-shadow: 1px 1px 5px black;
             padding: 50px;
@@ -157,6 +161,7 @@ body{
         }
 
         .weather_box {
+            list-style-type: none;
             background-color: rgba(0, 0, 0, 0.25);
             box-shadow: 1px 1px 5px black;
             padding: 50px;
