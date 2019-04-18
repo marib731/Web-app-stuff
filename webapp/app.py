@@ -127,6 +127,17 @@ def gettingStationLatLng():
 @app.route('/api/weather')
 def gettingWeather():
     return getWeather()
+
+@app.route('/api/JCD')
+def getJCD():  
+    url = "https://api.jcdecaux.com/vls/v1/stations?contract=Dublin&apiKey=166048e0e00bbc76dd9a53d07bab98427b29d1e0"
+    the_page = requests.get(url).json()
+    stationData = {}
+    for row in the_page:
+        stationData[row['number']] = {'name': row['address'], 'latitude':row['position']['lat'], 'longitude':row['position']['lng'], 
+                                      'bikes': row['available_bikes'], 'stands':row['available_bike_stands'], 'status':row['status']}
+    stationDataJSON = json.dumps(stationData)
+    return stationDataJSON
 #jessie end
 
 #  Enxi begin
