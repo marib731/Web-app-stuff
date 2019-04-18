@@ -144,3 +144,65 @@ var degToCard = function(deg){
     return "N"; 
   }
 }
+
+
+//enxi's fancy weather box
+
+
+        const app = document.getElementById('root');
+
+        $.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/weather?appid=ae679d7b6212a1a3daf681d0d843aa83&q=Dublin&units=metric',
+            type: "GET",
+            dataType: "jsonp",
+            jsonpCallback: "jsonp",
+            success: function (data) {
+
+                let widget = "<h3 style='padding-top:5px;'><strong>Current weather</strong>  </h3>" +
+                    "<img src = 'http://openweathermap.org/img/w/" + data.weather[0].icon + ".png' > " + data.weather[0].description +
+
+
+                    "<h3 style='text-align: center;border-bottom:thick double black; padding-bottom: 10%'>" + data.main.temp + "&deg;C</h3>" + "</hr>" +
+
+                    "<h3 style='padding-top:5px; font-size: 110%'>Humidity levels at: " + data.main.humidity + " %</h3>" +
+
+                    "<h3 style='padding-top:5px; font-size: 110%'>Winds at: " + data.wind.speed + " m/s</h3>"
+                document.getElementById("weather_box").innerHTML = widget;
+
+            }
+        })
+
+    function display() {
+            var date = $("#date").val();
+            var time = $("#time").val();
+
+            if (date != '' && time != '') {
+                $.ajax({
+                    url: 'http://api.openweathermap.org/data/2.5/forecast?appid=ae679d7b6212a1a3daf681d0d843aa83&q=Dublin&units=metric',
+                    type: "GET",
+                    dataType: "jsonp",
+                    jsonpCallback: "jsonp",
+                    success: function (data) {
+                        var a = 0;
+                        for (var i = 0; i < data.list.length; i++) {
+                            if (data.list[i].dt_txt == date + ' ' + time) {
+
+                                let fore = "<img src = 'http://openweathermap.org/img/w/" + data.list[i].weather[0].icon + ".png' > " + data.list[i].weather[0].description +
+
+                                    "<h3 style='text-align: center;border-bottom:thick double black; padding-bottom: 10%'>" + data.list[i].main.temp + "&deg;C</h3>" + "</hr>" +
+                                    "<h3 style='padding-top:5px; font-size: 110%'>Humidity levels at: " + data.list[i].main.humidity + " %</h3>" +
+                                    "<h3 style='padding-top:5px; font-size: 110%'>Winds at: " + data.list[i].wind.speed + " m/s</h3>"
+                                document.getElementById("show_forecast").innerHTML = fore;
+                                var a = 1;
+                            }
+
+                        }
+                        if (a == 0) {
+                            alert("Error");
+                        }
+
+                    }
+                });
+            }
+        }
+        /*Enxi weather box end*/
