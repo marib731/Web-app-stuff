@@ -28,7 +28,7 @@ import json
 
 app = Flask(__name__, static_url_path='')
 app.config.update(MAPS_APIKEY='AIzaSyD9RSjs_rAUX_KRiXxzUlNAL1aVzyZ6hs0',BIKE_API='8c88bf369a36af98d796377bc7d0defaf5bc562e') 
- # app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://EnxiJessieMarian:SoftwareEngineering2019@dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com:3306/DublinBikesData'
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://EnxiJessieMarian:SoftwareEngineering2019@dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com:3306/DublinBikesData'
 engine = create_engine('mysql+pymysql://EnxiJessieMarian:SoftwareEngineering2019@dublinbikesdata.cmgmbuuwvwd0.eu-west-1.rds.amazonaws.com:3306/DublinBikesData', echo=True)
 Base = declarative_base()
 Base.metadata.reflect(engine)
