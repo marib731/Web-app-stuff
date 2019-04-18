@@ -7,19 +7,24 @@ Created on Tue Apr  2 10:46:02 2019
 """
 import requests
 import sqlalchemy
+from flask import jsonify
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import sqlite3
 import logging
 import pandas as pd
-from flask import Flask, g, render_template, url_for, jsonify, request, jsonify
+from flask import Flask, g, render_template, url_for, jsonify, request
+from flask import Flask, render_template, request, jsonify
 from alertScraper import *
 from stationMarkers import *
 from weatherConnect import *
 import numpy
 import pickle
 import json
+
+
+
 
 app = Flask(__name__, static_url_path='')
 app.config.update(MAPS_APIKEY='AIzaSyD9RSjs_rAUX_KRiXxzUlNAL1aVzyZ6hs0',BIKE_API='8c88bf369a36af98d796377bc7d0defaf5bc562e') 
@@ -153,13 +158,13 @@ def bikes_prediction():
     f2 = 0
     try:
         with open("static/pickle/" + str(station_id) + ".pkl", "rb") as handle:
-            print(time_hour, temp, wind, time_week, weather_Drizzle, weather_Rain, weather_Snow)
             model = pickle.load(handle)
             f2 = model.predict(
                 numpy.array([[time_hour, temp, wind, time_week, weather_Drizzle, weather_Rain, weather_Snow]]))
+            f2=int(f2)
     except:
         pass
-    return str(f2.round()[0])
+    return str(f2)
 
 #  Enxi end
 if __name__ == "__main__":

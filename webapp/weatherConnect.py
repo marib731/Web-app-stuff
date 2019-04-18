@@ -14,10 +14,11 @@ def get_engine():
 def getWeather():  
     engine = get_engine()
     conn = engine.connect()  
-    url = "http://api.openweathermap.org/data/2.5/weather?appid=ae679d7b6212a1a3daf681d0d843aa83&q=Dublin"
+    url = "http://api.openweathermap.org/data/2.5/weather?appid=ae679d7b6212a1a3daf681d0d843aa83&q=Dublin&units=metric"
     the_page = requests.get(url).json()
+    print(the_page)
     weather = {'temperature':the_page['main']['temp'], 'cloud-cover':the_page['clouds']['all'], 
-               'humidity':the_page['main']['humidity'], 'wind-direction':the_page['wind']['deg'],
+               'humidity':the_page['main']['humidity'],
                'wind-speed': the_page['wind']['speed']}
     weatherJSON = json.dumps(weather)
     return weatherJSON
