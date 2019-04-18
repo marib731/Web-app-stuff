@@ -68,7 +68,7 @@ def aaRoadAlerts():
     for line in soup.find_all("p",{"class":"TweetTextSize TweetTextSize--normal js-tweet-text tweet-text"}):
         currentTweet = html.unescape(line.get_text())
         if currentTweet.startswith("#DUBLIN"):
-            dublinTweetsList.append(currentTweet[6:])   
+            dublinTweetsList.append(currentTweet[8:])   
     length = len(dublinTweetsList)
     if length > 7:
         length = 7
