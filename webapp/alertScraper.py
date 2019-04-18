@@ -75,10 +75,3 @@ def aaRoadAlerts():
     aaAlerts = { i : dublinTweetsList[i] for i in range(0, length ) }
     aa = json.dumps(aaAlerts)
     return aa
-    
-# 
-# if __name__ == "dbstationsAlerts()" or __name__ == "aaRoadAlerts()":
-#     db = dbstationsAlerts()
-#     aa = aaRoadAlerts()
-#     allAlerts = {**aa, **db}
-#     return allAlerts
