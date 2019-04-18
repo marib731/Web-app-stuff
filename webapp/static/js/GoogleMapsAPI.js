@@ -75,7 +75,7 @@ function initMap() {
                 infowindow.open(map, marker);
                 });
       }
-            }
+            
         }).catch((err) => {
             console.log('Fetch Error :-S', err)
         })

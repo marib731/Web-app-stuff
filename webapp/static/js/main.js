@@ -62,6 +62,9 @@ fetch('/api/weather')
 
 // Turn on/off Weather icon
 $('#mapW').click(function(){
+if($(this).val() === 'Turn on Weather'){
+    //setting when weather is on
+    $(this).val('Turn off Weather');
     fetch('/api/weather')
       .then(function(resp) {
         //check the response was ok
