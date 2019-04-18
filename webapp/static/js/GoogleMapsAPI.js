@@ -1,73 +1,84 @@
-
-var map, thePos, marker, infoWindow;
 var i = 0;
-var radarInterval;
-var trafficLayer;
 var timestamps = ['900913-m50m', '900913-m45m', '900913-m40m', '900913-m35m', '900913-m30m', '900913-m25m', '900913-m20m', '900913-m15m', '900913-m10m', '900913-m05m', '900913'];
 
+
+/*********************************create map on index.html*******************************************/
+var map, thePos, marker, infoWindow;
+var trafficLayer;
 function initMap() {
-    // Set Variables
+    // Set Variables from google api for bike lanes, traffic, and pop up when marker clicked
     trafficLayer = new google.maps.TrafficLayer();
-    infoWindow = new google.maps.InfoWindow();
+    infowindow = new google.maps.InfoWindow();
     bikeLayer = new google.maps.BicyclingLayer();
-  
     // Center for map
     thePos = {lat: 53.3498, lng: -6.2603};
-    
     // Create map
     map = new google.maps.Map($('#map')[0], {
       zoom: 13,
       center: thePos
     });
-    
     // Create markers
-    fetch('/api/stations')
+    fetch('/api/JCD')
       .then(function(response) {
-        //console.log("Getting stations")
         //check the response was ok
         if (response.status !== 200) {
             console.log('Looks like there was a problem. Status Code: ' + response.status);
             return;
         }
+        //response ok, get lat and long for each station
         response.json().then((data) => {
             for (var item in data) {
-                    latandlong = data[item]
-                    StationLat = latandlong[0];
-                    StationLng = latandlong[1];
+                    var StationLat = data[item]['latitude'];
+                    var StationLng = data[item]['longitude'];
+                    var stationStatus = data[item]['status'];
+                    var stationBikes = data[item]['bikes'];
+                    var stationStands = data[item]['stands'];
+                    var stationName = data[item]['name'];
                     
                 
+                    //contents of info window / pop up for each marker    
+                    var contentString = '<h3>' + stationName + '</h3><ul><li>Status: ' + stationStatus + '</li><li>Available Bikes: ' + stationBikes + '</li><li>Available Stands: ' + stationStands + '</li></ul>';
                 
-                        var contentString = '<p>put html in me to show station num, name, available bikes and stands</p>';
+                    //choose which image for the marker
+                    var image; 
+                    if (stationBikes < 1){
+                        var image = {url:'/static/image/bike-out.png', scaledSize: new google.maps.Size(35, 35)};
+                    }
+                    else if(stationBikes <= 5){
+                        var image = {url:'/static/image/bike-low.png', scaledSize: new google.maps.Size(35, 35)};
+                    }
+                    else{
+                        var image = {url:'/static/image/bike-full.png', scaledSize: new google.maps.Size(35, 35)};
+                    }
+                    //create the marker
+                    marker = new google.maps.Marker({
+                        position: {lat: StationLat, lng: StationLng},
+                        map: map,
+                        icon: image
+                    });
+                marker.content = '<h3>' + stationName + '</h3><ul><li>Status: ' + stationStatus + '</li><li>Available Bikes: ' + stationBikes + '</li><li>Available Stands: ' + stationStands + '</li></ul>';
 
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
 
-                
-                
-                var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-                marker = new google.maps.Marker({
-                    position: {lat: StationLat, lng: StationLng},
-                    map: map,
-                    icon: image
-                });
-                
-                marker.addListener('click', function() {
-                infowindow.open(map, marker);
-                });
+                    //on click, open info window / pop up for marker                                  
+                    google.maps.event.addListener(marker, 'click', function() {
+                    infowindow.setContent(this.content);
+                    infowindow.open(map,marker);
+
+ });
       }
-            
+        
+        //if error along way, catch and show in console
         }).catch((err) => {
             console.log('Fetch Error :-S', err)
         })
     })
 }
 
+/*********************************end of made map*******************************************/
 
 
 
-
-
+/*********************************buttons for map*******************************************/
 // Turn on/off Bicycle Lanes
 $('#mapBike').click(function(){
   
@@ -80,6 +91,7 @@ $('#mapBike').click(function(){
   }
   
 })
+
 
 // Turn on/off Traffic
 $('#mapTraffic').click(function(){
@@ -96,7 +108,108 @@ $('#mapTraffic').click(function(){
 
 
 
+// Change map markers from available bikes to available stands and back
+$('#mapMarkers').click(function(){
+if($(this).val() === 'Available Bikes'){
+    //showing available stands
+    $(this).val('Available Stands');
+    fetch('/api/JCD')
+      .then(function(respstands) {
+        //check the response was ok
+        if (respstands.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + respstands.status);
+            return;
+        }
+        
+        //iterate through 
+        respstands.json().then((dataAvail) => {
+            var JCD = dataAvail;
+            for (var station in JCD) {
+                var stationName = JCD[station]['name'];
+                var stationBikes = JCD[station]['bikes'];
+                var stationLatitude = JCD[station]['latitude'];
+                var stationLongitude = JCD[station]['longitude'];
+                var stationStatus = JCD[station]['status'];
+                var stationStands = JCD[station]['stands'];
+                    
+                
+                //choose which image for the marker
+                var image; 
+                if (stationStands < 1){
+                    var image = {url:'/static/image/stands-out.png', scaledSize: new google.maps.Size(35, 35)};
+                }
+                else if(stationStands <= 5){
+                    var image = {url:'/static/image/stands-low.png', scaledSize: new google.maps.Size(35, 35)};
+                }
+                else{
+                    var image = {url:'/static/image/stands-full.png', scaledSize: new google.maps.Size(35, 35)};
+                }
+                //create the marker
+                marker = new google.maps.Marker({
+                    position: {lat: StationLat, lng: StationLng},
+                    map: map,
+                    icon: image,
+                    info: contentString
+                });
+                         
+        //if error along way, catch and show in console
+        }}).catch((err) => {
+            console.log('Fetch Error :-S', err)
+        })
+    })
+    } 
+    
+    
+    else if($(this).val() === 'Available Stands'){
+        //showing available bikes
+        $(this).val('Available Bikes'); 
+        fetch('/api/JCD')
+          .then(function(respstands) {
+            //check the response was ok
+            if (respstands.status !== 200) {
+                console.log('Looks like there was a problem. Status Code: ' + respstands.status);
+                return;
+            }
 
+            //iterate through 
+            respstands.json().then((dataAvail) => {
+                var JCD = dataAvail;
+                for (var station in JCD) {
+                    var stationName = JCD[station]['name'];
+                    var stationBikes = JCD[station]['bikes'];
+                    var stationLatitude = JCD[station]['latitude'];
+                    var stationLongitude = JCD[station]['longitude'];
+                    var stationStatus = JCD[station]['status'];
+                    var stationStands = JCD[station]['stands'];
+
+
+                    //choose which image for the marker
+                    var image; 
+                    if (stationBikes < 1){
+                        var image = {url:'/static/image/bike-out.png', scaledSize: new google.maps.Size(35, 35)};
+                    }
+                    else if(stationBikes <= 5){
+                        var image = {url:'/static/image/bike-low.png', scaledSize: new google.maps.Size(35, 35)};
+                    }
+                    else{
+                        var image = {url:'/static/image/bike-full.png', scaledSize: new google.maps.Size(35, 35)};
+                    }
+                    //create the marker
+                    marker = new google.maps.Marker({
+                        position: {lat: StationLat, lng: StationLng},
+                        map: map,
+                        icon: image,
+                        info: contentString
+                    });
+
+            //if error along way, catch and show in console
+            }}).catch((err) => {
+                console.log('Fetch Error :-S', err)
+            })
+    })
+        }
+
+    })
 
 
 

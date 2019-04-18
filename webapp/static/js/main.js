@@ -116,50 +116,7 @@ var degToCard = function(deg){
 
 
 /************************************************************/
-// Turn on/off Weather icon
-$('#mapMarkers').click(function(){
-if($(this).val() === 'Available Stands'){
-    //showing available stands
-    $(this).val('Available Bikes');
-    fetch('/api/weather')
-      .then(function(respstands) {
-        //check the response was ok
-        if (respstands.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' + respstands.status);
-            return;
-        }
-        respstands.json().then((dataAvail) => {
-            for (var dataSB in dataAvail) {
-                        console.log(dataSB)
-                        if (dataSB == 'icon') {
-                            document.getElementById('mapMarkers').innerHTML += 'option 1';
-                        } else if (dataSB == 'temperature') {
-                            document.getElementById('mapMarkers').innerHTML += 'option 2';
-                        } else if (dataSB == 'cloud-cover') {
-                            document.getElementById('mapMarkers').innerHTML += 'option 3';
-                        } else if (dataSB == 'humidity') {
-                            document.getElementById('mapMarkers').innerHTML += 'option 4';
-                        } else if (dataSB == 'wind-speed') {
-                            document.getElementById('mapMarkers').innerHTML += 'option 5';
-                        }
-                    else{
-                        console.log("at least it's getting here!")
-                    }
-                    }
-        }).catch((err) => {
-            console.log('Fetch Error :-S', err)
-        })
-    })
-    } 
-    
-    
-    else{
-        //settings when weather is off
-        $(this).val('Available Stands');
-        //option to clear weather 
-        }
 
-    })
 
 
 /***************************************************************/
