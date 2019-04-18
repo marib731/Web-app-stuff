@@ -60,10 +60,7 @@
     </div>
     <div>
         {#        <div id="map" class="map"></div>#}
-        <div id="weather_box" style="border: #5f788a solid;width: 16%; margin: 0 auto;padding: 0;position: relative;
-     z-index: 99;margin-right: 10%; color: white; text-shadow: black;  position: absolute; right: 0; font-size: 20px;">
 
-        </div>
 
 
         <!--Enxi bike begin-->
@@ -85,9 +82,10 @@
         </div>
         <!--Enxi bike end-->
 
-        <div id="root"></div>
+
     </div>
 </div>
+    <div>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
             integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
             crossorigin="anonymous"></script>
@@ -208,10 +206,39 @@
         <label for="station_filter">Station Filter</label>
     </div>
     <button onclick="look_up()">Lookup</button>
+    <button onclick="clear()">Clear</button>
 </div>
 
 <script>
     function look_up() {
+        var station_id = document.getElementById("station_filter").value;
+        $.ajax({
+            url: "/station_id",
+            data: {'station_id': station_id},
+            dataType: 'json',
+            type: 'POST',
+            success: function (station) {
+                var station = station
+                var new_div = `<div class="col s6 m4">
+      <div class="card blue-grey darken-1">
+        <center><span class="card-title white-text">Station ID: ` + station.StationID + `</span></center>
+        <div class="card-content white-text">
+          <p>Address: ` + station.address + `<p>
+          <p>Total Bike Stands: ` + station.bike_stands + `<p>
+          <p>Avaliable Bike Stands: ` + station.available_bike_stands + `<p>
+          <p>Avaliable Bikes: ` + station.available_bikes + `<p>
+        </div>
+        
+      </div>
+    </div>`;
+                console.log(new_div);
+                $('#station_details').html(new_div);
+            }
+        });
+    }
+</script>
+<script>
+    function clear() {
         var station_id = document.getElementById("station_filter").value;
         console.log(station_id);
         $.ajax({
@@ -239,7 +266,6 @@
         });
     }
 </script>
-
 <div id="station_details" class="row">
     {% for station in stations %}
         <div class="col s6 m4">
@@ -281,5 +307,6 @@
 
 
 <script src="static/js/main.js"></script>
+        <footer class="footer"><p>Copyright 2019 - Enxi Cui, Jessica Butler and Marian Barry</p></footer>
 </body>
 </html>

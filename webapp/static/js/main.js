@@ -17,7 +17,7 @@ fetch('/api/aa')
     })
 })
 
-//Take dublin bikes station closures news and put titles in alert box
+/*Take dublin bikes station closures news and put titles in alert box
 fetch('/api/db')
   .then(function(responsedb) {
     //check the response was ok
@@ -62,9 +62,6 @@ fetch('/api/weather')
 
 // Turn on/off Weather icon
 $('#mapW').click(function(){
-if($(this).val() === 'Turn on Weather'){
-    //setting when weather is on
-    $(this).val('Turn off Weather');
     fetch('/api/weather')
       .then(function(resp) {
         //check the response was ok
