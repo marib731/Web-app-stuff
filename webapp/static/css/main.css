@@ -107,11 +107,10 @@ body{
     box-shadow: 1px 1px 5px black;
     border-radius: 15px;
     padding: 1%;
-    background-color: darkgrey;
-    color: white;
+    background-color: grey;
+    color: black;
     text-align: left;
     font-family: Arial;
-    opacity: 0.2;
 }
 
 

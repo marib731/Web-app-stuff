@@ -73,25 +73,20 @@ if($(this).val() === 'Turn on Weather'){
             return;
         }
         resp.json().then((dataW) => {
-            for(var data in dataW) {
-                console.log(dataW[data]);
-                if (data == 'temperature'){
-                    document.getElementById('weather').innerHTML +=  '<li> Temperature : ' + dataW[data] + '</li>';
-                }
-                else if(data == 'cloud-cover'){
-                    document.getElementById('weather').innerHTML +=  '<li> Cloud Cover : ' + dataW[data] + '%</li>';    
-                }
-                else if(data == 'humidity'){
-                    document.getElementById('weather').innerHTML +=  '<li> Humidity : ' + dataW[data] + '%</li>';    
-                }
-                else if(data == 'wind-direction'){
-                    windDir = degToCard(dataW[data]);
-                    document.getElementById('weather').innerHTML +=  '<li> Wind Direction : ' + windDir + '</li>';    
-                }
-                else if (data == 'wind-speed'){
-                    document.getElementById('weather').innerHTML +=  '<li> Wind Speed : ' + dataW[data] + 'km per hour</li>';    
-                }
-            }
+            for (var data in dataW) {
+                        
+                        if (data == 'icon') {
+                            document.getElementById('weather').innerHTML += '<li>' + dataW[data] + '</li>';
+                        } else if (data == 'temperature') {
+                            document.getElementById('weather').innerHTML += '<li> Temperature : ' + dataW[data] + '</li>';
+                        } else if (data == 'cloud-cover') {
+                            document.getElementById('weather').innerHTML += '<li> Cloud Cover : ' + dataW[data] + '%</li>';
+                        } else if (data == 'humidity') {
+                            document.getElementById('weather').innerHTML += '<li> Humidity : ' + dataW[data] + '%</li>';
+                        } else if (data == 'wind-speed') {
+                            document.getElementById('weather').innerHTML += '<li> Wind Speed : ' + dataW[data] + 'km per hour</li>';
+                        }
+                    }
         }).catch((err) => {
             console.log('Fetch Error :-S', err)
         })
