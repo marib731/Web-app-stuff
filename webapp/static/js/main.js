@@ -17,7 +17,8 @@ fetch('/api/aa')
     })
 })
 
-/*Take dublin bikes station closures news and put titles in alert box
+/*Take dublin bikes station closures news and put titles in alert box  ----not updated frequently enough and lack of formatting consistency for articles - didn't look nice
+was 
 fetch('/api/db')
   .then(function(responsedb) {
     //check the response was ok
@@ -43,36 +44,13 @@ fetch('/api/db')
 
 /****************call weather api *************************/
 fetch('/api/weather')
-  .then(function(resp) {
-    //check the response was ok
-    if (resp.status !== 200) {
-        console.log('Looks like there was a problem. Status Code: ' + resp.status);
-        return;
-    }
-    
-    resp.json().then((dataW) => {
-        for (var data in dataW) {
-            document.getElementById('mapW').innerHTML += '<li>' + dataW[data] + '</li>';
-        }
-    }).catch((err) => {
-        console.log('Fetch Error :-S', err)
-    })
-})
-
-
-// Turn on/off Weather icon
-$('#mapW').click(function(){
-if($(this).val() === 'Turn on Weather'){
-    //setting when weather is on
-    $(this).val('Turn off Weather');
-    fetch('/api/weather')
-      .then(function(resp) {
+      .then(function(respweather) {
         //check the response was ok
-        if (resp.status !== 200) {
-            console.log('Looks like there was a problem. Status Code: ' + resp.status);
+        if (respweather.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + respweather.status);
             return;
         }
-        resp.json().then((dataW) => {
+        respweather.json().then((dataW) => {
             for (var data in dataW) {
                         
                         if (data == 'icon') {
@@ -86,24 +64,18 @@ if($(this).val() === 'Turn on Weather'){
                         } else if (data == 'wind-speed') {
                             document.getElementById('weather').innerHTML += '<li> Wind Speed : ' + dataW[data] + 'km per hour</li>';
                         }
+                        else{
+                            document.getElementById('mapW').innerHTML += '<li>' + dataW[data] + '</li>';
+                        }
                     }
         }).catch((err) => {
             console.log('Fetch Error :-S', err)
         })
     })
-    } 
-    
-    
-    else{
-        //settings when weather is off
-        $(this).val('Turn on Weather');
-        //option to clear weather 
-        }
-
-    })
+     
 
 
-//function to change circle degrees to direction for wind direction
+/*function to change circle degrees to direction for wind direction ----obselete as wind direction no longer returned from api
 var degToCard = function(deg){
   if (deg>11.25 && deg<33.75){
     return "NNE";
@@ -138,7 +110,62 @@ var degToCard = function(deg){
   }else{
     return "N"; 
   }
-}
+}*/
+/********************************************************************************************************************************/
+
+
+
+/************************************************************/
+// Turn on/off Weather icon
+$('#mapMarkers').click(function(){
+if($(this).val() === 'Available Stands'){
+    //showing available stands
+    $(this).val('Available Bikes');
+    fetch('/api/weather')
+      .then(function(respstands) {
+        //check the response was ok
+        if (respstands.status !== 200) {
+            console.log('Looks like there was a problem. Status Code: ' + respstands.status);
+            return;
+        }
+        respstands.json().then((dataAvail) => {
+            for (var dataSB in dataAvail) {
+                        console.log(dataSB)
+                        if (dataSB == 'icon') {
+                            document.getElementById('mapMarkers').innerHTML += 'option 1';
+                        } else if (dataSB == 'temperature') {
+                            document.getElementById('mapMarkers').innerHTML += 'option 2';
+                        } else if (dataSB == 'cloud-cover') {
+                            document.getElementById('mapMarkers').innerHTML += 'option 3';
+                        } else if (dataSB == 'humidity') {
+                            document.getElementById('mapMarkers').innerHTML += 'option 4';
+                        } else if (dataSB == 'wind-speed') {
+                            document.getElementById('mapMarkers').innerHTML += 'option 5';
+                        }
+                    else{
+                        console.log("at least it's getting here!")
+                    }
+                    }
+        }).catch((err) => {
+            console.log('Fetch Error :-S', err)
+        })
+    })
+    } 
+    
+    
+    else{
+        //settings when weather is off
+        $(this).val('Available Stands');
+        //option to clear weather 
+        }
+
+    })
+
+
+/***************************************************************/
+
+
+
 
 
 //enxi's fancy weather box

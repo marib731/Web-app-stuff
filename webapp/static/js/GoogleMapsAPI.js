@@ -30,30 +30,14 @@ function initMap() {
             return;
         }
         response.json().then((data) => {
-            //checkbox filters here - eventlistener
-            //
             for (var item in data) {
-                    console.log(data)
-                    console.log(item)
                     latandlong = data[item]
-                //console.log(latandlong)
                     StationLat = latandlong[0];
                     StationLng = latandlong[1];
-                    // Create markers
-                   //checkbox filters here - eventlistener 
+                    
                 
                 
-                        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Bikes</b></p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
+                        var contentString = '<p>put html in me to show station num, name, available bikes and stands</p>';
 
         var infowindow = new google.maps.InfoWindow({
           content: contentString
@@ -61,16 +45,13 @@ function initMap() {
 
                 
                 
-                /*        var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
-        var beachMarker = new google.maps.Marker({
-          position: {lat: -33.890, lng: 151.274},
-          map: map,
-          icon: image
-        });*/
+                var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
                 marker = new google.maps.Marker({
-                  position: {lat: StationLat, lng: StationLng},
-                  map: map
+                    position: {lat: StationLat, lng: StationLng},
+                    map: map,
+                    icon: image
                 });
+                
                 marker.addListener('click', function() {
                 infowindow.open(map, marker);
                 });
@@ -81,6 +62,10 @@ function initMap() {
         })
     })
 }
+
+
+
+
 
 
 // Turn on/off Bicycle Lanes
