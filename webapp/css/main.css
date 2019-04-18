@@ -1,0 +1,170 @@
+/*************main background**********************/
+body {
+    background-color: #114B56;
+}
+
+.whitebkgnd {
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 3%;
+    padding: 5%;
+    max-width: 90%;
+    background-color: #f1f1f1;
+    border-radius: 15px;
+    height: 100%;
+
+}
+
+/***************************************************/
+
+/************************Nav Bar Start**********************/
+
+/*removes dots/bullet points from list*/
+.nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+/*display nav horizontal*/
+.nav ul li {
+    display: inline-flex;
+    flex-direction: row;
+}
+
+/*centers navbar buttons*/
+.nav ul {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav ul li {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/*Nav bar background colour*/
+.nav ul {
+    background-color: #114B56;
+}
+
+/*nav background colour on hovering over button*/
+.nav ul li:hover {
+    background-color: #f1f1f1;
+    text-emphasis-color: black;
+}
+
+/*nav background colour on selected button*/
+.nav ul li:active {
+    background-color: #f1f1f1;
+    text-emphasis-color: black;
+}
+
+/*text colour and decoration inside nav buttons*/
+.nav ul li a {
+    display: inherit;
+    color: white; /*text/link colour*/
+    /*spaces of and between buttons*/
+    padding-left: 47px;
+    padding-right: 47px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    text-decoration: none; /*text decoration none removes line under link on navbar*/
+}
+
+
+/************************Nav Bar end**********************/
+
+
+/****************Index Page Map*****************************/
+#map {
+    height: 400px;
+    width: 400px;
+}
+
+.map {
+    height: 400px;
+    width: 400px;
+}
+
+/**********************Index page map end*******************/
+
+
+/**********************alert box end*******************/
+.alerts-container {
+    padding: 0;
+    width: 30%;
+    background-color:#f1f1f1;
+    float: right;
+    margin-left: 70%;
+    height: 450px;
+    overflow: scroll;
+    bottom: auto;
+
+}
+
+
+/**********************alert box end*******************/
+
+
+
+
+  /*******************enxi's weather css*******************/
+.jumbotron {
+    background-color: blueviolet;
+    margin-top: 100px;
+    margin-right: 20%;
+    float: right;
+    text-align: center;
+    font-family: Arial;
+    opacity: 0.2;
+
+}
+
+#map {
+    width: 800px;
+    height: 800px;
+
+}
+
+#weather_box {
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 5px black;
+    padding: 1px;
+    border-radius: 1px;
+
+    position: absolute; right: 0;
+    bottom: 100px;
+
+}
+
+#search_date {
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 5px black;
+    padding: 50px;
+    border-radius: 10px;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    font-weight: bold;
+    font-size: 100%;
+    width: 50%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#error {
+    background-color: rgba(0, 0, 0, 0.25);
+    box-shadow: 1px 1px 5px black;
+    padding: 50px;
+    border-radius: 10px;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    font-weight: bold;
+    font-size: 100%;
+
+
+}
+
+/********************************************************************/

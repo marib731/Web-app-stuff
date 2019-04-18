@@ -129,17 +129,14 @@ user-scalable=no">
         dataType: "jsonp",
         jsonpCallback: "jsonp",
         success: function (data) {
-            {#console.log(data);#}
-            {#$("#weather_new").html(widget);#}
-            // document.getElementById("displaydata").innerHTML = data;
+
             let widget = "<h3 style='padding-top:5px;'><strong>Current weather</strong>  </h3>" +
                 "<img src = 'http://openweathermap.org/img/w/" + data.weather[0].icon + ".png' > " + data.weather[0].description +
 
-                {#"<h3 style='padding-top:5px; font-size: 110%'>Temperature: " + #}
                 "<h3 style='text-align: center;border-bottom:thick double black; padding-bottom: 10%'>" + data.main.temp + "&deg;C</h3>" + "</hr>" +
-                {#"</h3>" +#}
+
                 "<h3 style='padding-top:5px; font-size: 110%'>Humidity levels at: " + data.main.humidity + " %</h3>" +
-                {#"<h3 style='padding-top:5px;'><strong>Wind Direction</strong>: " + data.wind.deg + " &deg;C</h3>" +#}
+
                 "<h3 style='padding-top:5px; font-size: 110%'>Winds at: " + data.wind.speed + " m/s</h3>"
             document.getElementById("weather_box").innerHTML = widget;
 
@@ -184,7 +181,6 @@ user-scalable=no">
             });
         }
     }
-
 
 </script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
