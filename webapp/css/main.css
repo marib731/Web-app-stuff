@@ -8,7 +8,7 @@ body {
     margin-right: 1%;
     margin-bottom: 3%;
     padding: 5%;
-    max-width: 90%;
+    max-width: 100%;
     background-color: #f1f1f1;
     border-radius: 15px;
     height: 100%;
@@ -86,10 +86,6 @@ body {
     width: 400px;
 }
 
-.map {
-    height: 400px;
-    width: 400px;
-}
 
 /**********************Index page map end*******************/
 
@@ -98,7 +94,7 @@ body {
 .alerts-container {
     padding: 0;
     width: 30%;
-    background-color:#f1f1f1;
+    background-color: #f1f1f1;
     float: right;
     margin-left: 70%;
     height: 450px;
@@ -111,9 +107,7 @@ body {
 /**********************alert box end*******************/
 
 
-
-
-  /*******************enxi's weather css*******************/
+/*******************enxi's weather css*******************/
 .jumbotron {
     background-color: blueviolet;
     margin-top: 100px;
@@ -134,27 +128,48 @@ body {
 #weather_box {
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: 1px 1px 5px black;
-    padding: 1px;
+    padding: 10px;
     border-radius: 1px;
-
-    position: absolute; right: 0;
+    position: absolute;
+    right: 0;
     bottom: 100px;
 
 }
 
+
 #search_date {
-    background-color: rgba(0, 0, 0, 0.25);
-    box-shadow: 1px 1px 5px black;
-    padding: 50px;
+    background-color: rgb(39, 77, 90);
+    opacity: 0.7;
+    box-shadow: 0px 0px 0px black;
+    padding: 10px;
     border-radius: 10px;
     font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
     font-weight: bold;
     font-size: 100%;
-    width: 50%;
-    margin: 0 auto;
-    position: relative;
+    width: 40%;
+    border: solid;
+    color: #f2f2f2;
+    float: left;
+;
 }
 
+#bike_prediction {
+    width: 30%;
+    margin-left: 60%;
+    position: absolute;
+    right: 10%;
+    top: 50%
+
+}
+
+#available_bikes{
+    font-size: 20px;
+    border-radius: 10px;
+    font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+    color:black;
+    padding: 5px;
+
+}
 #error {
     background-color: rgba(0, 0, 0, 0.25);
     box-shadow: 1px 1px 5px black;
