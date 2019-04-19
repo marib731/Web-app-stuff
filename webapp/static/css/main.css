@@ -1,6 +1,8 @@
 /*************main background**********************/
 body{
     background-color: #114B56;
+    font-family: sans-serif;
+    text-align: justify;
 }
 
 .whitebkgnd{
@@ -113,7 +115,6 @@ body{
     padding: 1%;
     color: black;
     text-align: left;
-    font-family: Arial;
 }
 
 
@@ -121,14 +122,14 @@ body{
 
 
 
-/*******************enxi's weather css*******************/
+/*******************enxi's css*******************/
+
       .jumbotron {
             background-color: blueviolet;
             margin-top: 100px;
             margin-right: 20%;
             float: right;
             text-align: center;
-            font-family: Arial;
             opacity: 0.2;
           list-style-type: none;
         }
@@ -155,7 +156,6 @@ body{
             box-shadow: 1px 1px 5px black;
             padding: 1px;
             border-radius: 1px;
-            font-family: Arial;
             font-weight: bold;
             font-size: 100%; 
             bottom: 500px; 
@@ -169,7 +169,7 @@ body{
             box-shadow: 1px 1px 5px black;
             padding: 50px;
             border-radius: 10px;
-            font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            font-family: sans-serif;
             font-weight: bold;
             font-size: 100%;
             border: #5f788a;
@@ -197,7 +197,7 @@ body{
             box-shadow: 1px 1px 5px black;
             padding: 50px;
             border-radius: 10px;
-            font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            font-family: sans-serif;
             font-weight: bold;
             font-size: 100%;
             width: 35%;
@@ -209,7 +209,7 @@ body{
             box-shadow: 1px 1px 5px black;
             padding: 50px;
             border-radius: 10px;
-            font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Geneva', 'Verdana', sans-serif;
+            font-family: sans-serif;
             font-weight: bold;
             font-size: 100%;
 
@@ -218,7 +218,7 @@ body{
 /********************************************************************/
 
 
-/*footer*/
+/********************footer****************************/
 .footer{
     margin-bottom: 5%;
     margin-right: 1%;
@@ -229,4 +229,14 @@ body{
     padding: 1%;
     align-content: center;
 }
-/**/
+/******************************************************/
+
+
+
+/*************************text*****************************/
+.text {
+    text-align: justify;
+    font-family: sans-serif;
+}
+
+/***********************end text***************************/

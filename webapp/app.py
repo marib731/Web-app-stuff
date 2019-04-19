@@ -118,12 +118,6 @@ def get_db():
 def get_aa():
     return aaRoadAlerts()
 
-
-@app.route('/api/stations')
-def gettingStationLatLng():
-    return getStations()
-
-
 @app.route('/api/weather')
 def gettingWeather():
     return getWeather()
