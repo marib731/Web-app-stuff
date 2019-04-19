@@ -1,7 +1,9 @@
+<!-- this page is the homepage to show the different stations on the map, when user click the stations it will shou the staion bikes information.
+and a weather box shows on the right top of the map, to show current weather, we also got the road watch alert to remind users of the road. -->
 <!DOCTYPE html>
 <html>
 <head>
-    <!----------------------------- meta data, links --------------------------------------------->
+<!--   meta data links  -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="static/css/main.css">
@@ -9,7 +11,7 @@
     <script src="static/js/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<!------------------------------------nav bar start----------------------------------------->
+<!-- nav bar start -->
 <header class="header" id="header">
     <!--nav bar image-->
     <img src="static/image/Banniere.png" alt="Banner" width="100%" height="10%">
@@ -22,12 +24,12 @@
             <li class="contact"><a href="contact">Contact</a></li>
         </ul>
     </div>
-</header>
-<!----------------------------------nav bar end-------------------------------------------->
+    </header>
+<!-- nav bar end -->
 
-<!-----------------------------main body of content------------------------------------------>
+<!-- main body of content -->
 <div class="whitebkgnd" id="whitebkgnd">
-    <!----------------------map, buttons, weather box--------------->
+<!--     map, buttons, weather box -->
     <input id="mapTraffic" type="button" value="Turn on Traffic"/>
     <input id="mapBike" type="button" value="Turn on Bike Lanes"/>
     <div style="position: relative">
@@ -38,7 +40,7 @@
             <ul class="weather" id="weather">
             </ul>
         </div>
-    <!---------------------alerts side bar-------------------------->
+<!--   alerts side bar -->
         <div id="alerts-container" class="alerts-container" style="position: absolute;right: 0;top: 0">
             <h2 style="text-align: center">RoadwatchAlerts</h2>
             <ul class="alerts" id="aaslerts">
@@ -47,7 +49,7 @@
         </div>
     </div>
 </div>
-<!-----------------------------end of main body------------------------------------------>
+<!-- end of main body -->
     
 <!--javascript - heavy javascript can take seconds to load in so better at end so page loads first and user gets illusion of loading faster-->
 <script src="static/js/main.js"></script>
@@ -56,9 +58,9 @@
 <script src="static/js/GoogleMapsAPI.js"></script>
 <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyChFqt0viVKUQkLpX0Fmnfj4W9yTj-7sew&callback=initMap"></script>
- <!-----------------------------footer------------------------------------------>   
+<!-- footer   -->
     <footer class="footer"><p>Copyright 2019 - Enxi Cui, Jessica Butler and Marian Barry</p></footer>
-<!------------------------------------------------------------------------------> 
+
 </body>
 </html>
 
